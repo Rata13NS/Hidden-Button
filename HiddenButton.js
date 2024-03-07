@@ -1,32 +1,27 @@
-var button1 = document.getElementById('hiddenButton1');
-var button2 = document.getElementById('hiddenButton2');
-var button3 = document.getElementById('hiddenButton3');
+let buttons = [];
+
+function createButtons() {
+    let container = document.getElementById("buttons-container");
+    for (var i = 0; i < 3; i++) {
+        let button = document.createElement('button');
+        button.textContent = 'Button ' + (i + 1);
+        button.style.background = "rgba(255,0,0,0.8)";
+        buttons.push(button);
+        container.appendChild(button);
+      }
+}
 
 function chooseRandomButton() {
-    var buttons = [button1, button2, button3];
-    winnerButton = buttons[Math.floor(Math.random() * buttons.length)];
-    console.log(winnerButton);
-}
-
-function status1() {
-    if (winnerButton === button1) {
-        document.getElementById("hiddenButton1").innerHTML = "Castigator";
-    } else {
-        document.getElementById("hiddenButton1").innerHTML = "Necastigator";
-    }
-}
-
-function status2() {
-    if (winnerButton === button2) {
-        document.getElementById("hiddenButton2").innerHTML = "Castigator";
-    } else {
-        document.getElementById("hiddenButton2").innerHTML = "Necastigator";
-    }
-}
-function status3() {
-    if (winnerButton === button3) {
-        document.getElementById("hiddenButton3").innerHTML = "Castigator";
-    } else {
-        document.getElementById("hiddenButton3").innerHTML = "Necastigator";
-    }
+    let winnerIndex = Math.floor(Math.random() * 3);
+    let winnerButtonIndex = buttons[winnerIndex];
+    console.log(winnerIndex);
+    buttons.forEach(function(button, index) {
+        button.addEventListener('click', function() {
+          if (button === winnerButtonIndex) {
+            button.textContent = 'Castigator';
+          } else {
+            button.textContent = 'Necastigator';
+          }
+        });
+      });
 }
